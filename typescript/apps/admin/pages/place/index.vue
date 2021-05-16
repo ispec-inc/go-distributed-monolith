@@ -22,9 +22,10 @@
 
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator'
-import PlaceData from '~/types/place'
 import PlaceResource from '~/resources/place'
 import Resource from '~/resources/resource'
+import placeModule from '~/store/modules/place'
+import PlaceData from '~/types/place'
 
 @Component({})
 export default class PlacePage extends Vue {
@@ -52,17 +53,13 @@ export default class PlacePage extends Vue {
     },
   ]
 
-  places: PlaceResource[] = []
+  get places(): PlaceData[] {
+    return placeModule?.placeList ?? []
+  }
 
   async mounted() {
     this.isFetching = true
-    await this.$store
-      .dispatch('place/getPlaceList')
-      .then()
-      .catch((error) => console.log(error))
-    this.places = this.$accessor.place.list.map(
-      (data: PlaceData) => new PlaceResource(data)
-    )
+    await placeModule.fetchPlaceList()
     this.isFetching = false
   }
 
