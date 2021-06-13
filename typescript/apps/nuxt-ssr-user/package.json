@@ -32,7 +32,7 @@
     "camelcase-keys": "6.2.2",
     "nuxt": "2.15.6",
     "nuxt-typed-vuex": "0.1.22",
-    "snakecase-keys": "3.2.1",
+    "snakecase-keys": "4.0.2",
     "typed-vuex": "0.1.22",
     "vee-validate": "3.4.8",
     "vue-class-component": "7.2.6",
