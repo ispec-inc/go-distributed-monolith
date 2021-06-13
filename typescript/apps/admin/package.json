@@ -28,7 +28,7 @@
     "@babel/preset-env": "7.12.17",
     "@monorepo/fast-form": "./libs/fast-form",
     "@monorepo/proto": "./libs/proto",
-    "@nuxt/typescript-runtime": "0.4.10",
+    "@nuxt/typescript-runtime": "1.0.0",
     "@nuxtjs/auth": "4.9.1",
     "@nuxtjs/axios": "5.12.0",
     "camelcase-keys": "6.2.2",
