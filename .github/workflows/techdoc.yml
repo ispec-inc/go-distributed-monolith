@@ -1,11 +1,10 @@
 name: techdoc
+
 on:
   push:
     branches:
       - master
-  pull_request:
-    branches:
-      - "*"
+
 jobs:
   techdoc:
     name: runner / techdocs

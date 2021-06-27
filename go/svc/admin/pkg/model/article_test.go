@@ -4,6 +4,7 @@ import (
 	"testing"
 
 	"github.com/ispec-inc/monorepo/go/pkg/infra/entity"
+	"github.com/ispec-inc/monorepo/go/pkg/rdb"
 	"github.com/ispec-inc/monorepo/go/pkg/testool"
 	"github.com/ispec-inc/monorepo/go/svc/admin/pkg/database"
 	"github.com/stretchr/testify/assert"
@@ -38,7 +39,7 @@ func TestArticleModel_Find(t *testing.T) {
 		},
 	}
 
-	db, cleanup := testool.PrepareDB(t, "article_model_find", []interface{}{
+	db, cleanup := testool.PrepareDB(t, rdb.DBMSMySQL, "article_model_find", []interface{}{
 		&entity.Article{ID: int64(1)},
 	})
 	database.Init(db)
@@ -84,7 +85,7 @@ func TestArticleModel_Create(t *testing.T) {
 		},
 	}
 
-	db, cleanup := testool.PrepareDB(t, "article_model_create", []interface{}{
+	db, cleanup := testool.PrepareDB(t, rdb.DBMSMySQL, "article_model_create", []interface{}{
 		&entity.Article{ID: int64(1)},
 	})
 	database.Init(db)
@@ -131,7 +132,7 @@ func TestArticleModel_Save(t *testing.T) {
 		},
 	}
 
-	db, cleanup := testool.PrepareDB(t, "article_model_save", []interface{}{
+	db, cleanup := testool.PrepareDB(t, rdb.DBMSMySQL, "article_model_save", []interface{}{
 		&entity.Article{ID: int64(1)},
 	})
 	database.Init(db)
@@ -172,7 +173,7 @@ func TestArticleModel_Delete(t *testing.T) {
 		},
 	}
 
-	db, cleanup := testool.PrepareDB(t, "article_model_delete", []interface{}{
+	db, cleanup := testool.PrepareDB(t, rdb.DBMSMySQL, "article_model_delete", []interface{}{
 		&entity.Article{ID: int64(1)},
 	})
 	database.Init(db)
@@ -210,7 +211,7 @@ func TestArticlesModel_Find(t *testing.T) {
 		},
 	}
 
-	db, cleanup := testool.PrepareDB(t, "articles_model_find", []interface{}{
+	db, cleanup := testool.PrepareDB(t, rdb.DBMSMySQL, "articles_model_find", []interface{}{
 		&entity.Article{ID: int64(1)},
 	})
 	database.Init(db)

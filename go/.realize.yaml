@@ -3,30 +3,15 @@ settings:
     force: false
     interval: 0s
 schema:
-  - name: article
+  - name: server
     path: .
     commands:
       build:
         status: true
-        method: go build -o ./bin/article ./svc/article/cmd/server/rest
+        method: go build -o ./bin/server ./cmd/server
       run:
         status: true
-        method: ./bin/article
-    watcher:
-      extensions:
-        - go
-      paths:
-        - /
-
-  - name: admin
-    path: .
-    commands:
-      build:
-        status: true
-        method: go build -o ./bin/admin ./svc/admin/cmd/server/rest
-      run:
-        status: true
-        method: ./bin/admin
+        method: ./bin/server
     watcher:
       extensions:
         - go

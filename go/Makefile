@@ -7,19 +7,21 @@ init: ## setup docker build, network, and databases
 	docker network create monorepo || true
 	docker-compose up -d article-mysql
 	docker-compose up -d article-mysql-test
-	docker-compose run dockerize -wait tcp://article-mysql:3306 -timeout 20s
-	docker-compose run dockerize -wait tcp://article-mysql-test:3306 -timeout 20s
+	docker-compose up -d message-bus-redis
+	docker-compose run --rm dockerize -wait tcp://article-mysql:3306 -timeout 20s
+	docker-compose run --rm dockerize -wait tcp://article-mysql-test:3306 -timeout 20s
 
 build:
 	docker-compose build
 
 seed: ## insert seed data
-	docker-compose run --rm article-api go run ./cmd/db/seed
+	docker-compose run --rm api go run ./cmd/db/seed
 
 server: ## go run server
 	docker-compose up -d article-mysql
-	docker-compose run dockerize -wait tcp://article-mysql:3306 -timeout 20s
-	docker-compose up article-api admin-api
+	docker-compose up -d message-bus-redis
+	docker-compose run --rm dockerize -wait tcp://article-mysql:3306 -timeout 20s
+	docker-compose up api
 
 test: pkg = ./...
 test: ## go test

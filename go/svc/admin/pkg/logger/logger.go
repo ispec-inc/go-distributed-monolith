@@ -2,9 +2,9 @@ package logger
 
 import (
 	"github.com/ispec-inc/monorepo/go/pkg/applog/logger"
-	"github.com/ispec-inc/monorepo/go/pkg/config"
 	"github.com/ispec-inc/monorepo/go/pkg/sentry"
 	"github.com/ispec-inc/monorepo/go/pkg/stdlog"
+	"github.com/ispec-inc/monorepo/go/svc/admin/pkg/config"
 )
 
 var lgr logger.Logger
@@ -15,19 +15,19 @@ func Init() (func() error, error) {
 		err     error
 	)
 
-	switch config.App.Env {
-	case config.EnvDev:
-		lgr = stdlog.New()
-		return func() error { return nil }, nil
-	default:
+	switch config.Logger.Type {
+	case config.LoggerTypeSentry:
 		lgr, cleanup, err = sentry.New(
-			sentry.Options{
-				Environment: config.Sentry.DSN,
+			sentry.Config{
+				Environment: config.Sentry.Env,
 				DSN:         config.Sentry.DSN,
 				Debug:       config.Sentry.Debug,
 			},
 		)
 		return func() error { cleanup(); return nil }, err
+	default:
+		lgr = stdlog.New()
+		return func() error { return nil }, nil
 	}
 }
 

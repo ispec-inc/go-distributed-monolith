@@ -27,6 +27,10 @@
     - [GetRequest](#article.api.user.GetRequest)
     - [GetResponse](#article.api.user.GetResponse)
   
+- [media/api/rest/v1/image/image.proto](#media/api/rest/v1/image/image.proto)
+    - [CreateRequest](#media.api.image.CreateRequest)
+    - [CreateResponse](#media.api.image.CreateResponse)
+  
 - [Scalar Value Types](#scalar-value-types)
 
 
@@ -316,6 +320,47 @@
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | user | [article.view.User](#article.view.User) |  |  |
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+<a name="media/api/rest/v1/image/image.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## media/api/rest/v1/image/image.proto
+
+
+
+<a name="media.api.image.CreateRequest"></a>
+
+### CreateRequest
+Request should be `multipart/form-data`, not json.
+
+
+
+
+
+
+<a name="media.api.image.CreateResponse"></a>
+
+### CreateResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| url | [string](#string) |  | The place stored requested image. |
 
 
 

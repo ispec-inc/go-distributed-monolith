@@ -2,9 +2,9 @@ package registry
 
 import (
 	"github.com/ispec-inc/monorepo/go/pkg/applog/logger"
-	"github.com/ispec-inc/monorepo/go/pkg/config"
 	"github.com/ispec-inc/monorepo/go/pkg/sentry"
 	"github.com/ispec-inc/monorepo/go/pkg/stdlog"
+	"github.com/ispec-inc/monorepo/go/svc/article/pkg/config"
 )
 
 type Logger struct {
@@ -18,13 +18,11 @@ func NewLogger() (Logger, func() error, error) {
 		err     error
 	)
 
-	switch config.App.Env {
-	case config.EnvDev:
-		lgr = stdlog.New()
-	default:
+	switch config.Logger.Type {
+	case config.LoggerTypeSentry:
 		slgr, scleanup, serr := sentry.New(
-			sentry.Options{
-				Environment: config.Sentry.DSN,
+			sentry.Config{
+				Environment: config.Sentry.Env,
 				DSN:         config.Sentry.DSN,
 				Debug:       config.Sentry.Debug,
 			},
@@ -32,6 +30,8 @@ func NewLogger() (Logger, func() error, error) {
 		lgr = slgr
 		clenaup = func() error { scleanup(); return nil }
 		err = serr
+	default:
+		lgr = stdlog.New()
 	}
 
 	return Logger{lgr}, clenaup, err

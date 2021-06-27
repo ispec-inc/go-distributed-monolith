@@ -3,23 +3,23 @@ package sentry
 import (
 	"time"
 
-	"github.com/getsentry/sentry-go"
+	sentry "github.com/getsentry/sentry-go"
 	"github.com/ispec-inc/monorepo/go/pkg/applog/logger"
 )
 
 type Logger struct{}
 
-type Options struct {
+type Config struct {
 	Environment string
 	DSN         string
 	Debug       bool
 }
 
-func New(options Options) (*Logger, func(), error) {
+func New(c Config) (*Logger, func(), error) {
 	err := sentry.Init(sentry.ClientOptions{
-		Dsn:         options.DSN,
-		Environment: options.Environment,
-		Debug:       options.Debug,
+		Dsn:         c.DSN,
+		Environment: c.Environment,
+		Debug:       c.Debug,
 	})
 	cleanup := func() { sentry.Flush(2 * time.Second) }
 	return &Logger{}, cleanup, err

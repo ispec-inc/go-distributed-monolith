@@ -3,7 +3,7 @@ name: terraform-apply
 on:
   push:
     branches:
-      - main
+      - master
     paths:
       - terraform/**
 

@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package media.api.image;
+
+option go_package = "github.com/ispec-inc/monorepo/go/proto/media/api/rest/v1/image";
+
+/**
+ * Request should be `multipart/form-data`, not json.
+*/
+message CreateRequest {}
+
+message CreateResponse {
+  string url = 1; // The place stored requested image.
+}

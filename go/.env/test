@@ -1,6 +1,0 @@
-DB_DRIVER=mysql
-DB_USERNAME=root
-DB_PASSWORD=password
-DB_NAME=article
-DB_HOST=article-mysql-test
-DB_PORT=3306

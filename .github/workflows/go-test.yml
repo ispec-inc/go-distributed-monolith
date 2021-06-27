@@ -5,8 +5,6 @@ on:
     branches:
       - master
   pull_request:
-    branches:
-      - "*"
     paths:
       - go/** 
       - .github/workflows/gotest.yml
@@ -21,8 +19,7 @@ jobs:
 
       - name: initialize
         run: |
-          cp .env/article.default .env/article
-          cp .env/admin.default .env/admin
+          cp .env/server.default .env/server
           make init
         working-directory: go
       

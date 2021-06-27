@@ -1,20 +1,26 @@
 package middleware
 
 import (
+	"time"
+
 	"github.com/go-chi/chi"
 	"github.com/go-chi/chi/middleware"
 	"github.com/go-chi/cors"
-	"github.com/ispec-inc/monorepo/go/pkg/config"
 )
 
-func Common(r *chi.Mux) *chi.Mux {
+type CommonConfig struct {
+	Timeout      time.Duration
+	AllowOrigins []string
+}
+
+func Common(r *chi.Mux, c CommonConfig) *chi.Mux {
 	r.Use(middleware.RequestID)
 	r.Use(middleware.RealIP)
 	r.Use(middleware.Logger)
 	r.Use(middleware.Recoverer)
-	r.Use(middleware.Timeout(config.Router.Timeout))
+	r.Use(middleware.Timeout(c.Timeout))
 	r.Use(cors.Handler(cors.Options{
-		AllowedOrigins: config.Router.AllowOrigins,
+		AllowedOrigins: c.AllowOrigins,
 		AllowedMethods: []string{"GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"},
 		AllowedHeaders: []string{
 			"Accept", "Accept-Language", "Authorization",
