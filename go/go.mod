@@ -7,7 +7,7 @@ require (
 	github.com/caarlos0/env/v6 v6.5.0
 	github.com/envoyproxy/protoc-gen-validate v0.5.1
 	github.com/getsentry/sentry-go v0.10.0
-	github.com/go-chi/chi v1.5.4
+	github.com/go-chi/chi/v4 v4.1.2
 	github.com/go-chi/cors v1.2.0
 	github.com/golang/mock v1.5.0
 	github.com/k0kubun/pp v2.4.0+incompatible
