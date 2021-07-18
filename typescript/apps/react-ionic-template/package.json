@@ -51,8 +51,8 @@
   },
   "devDependencies": {
     "@capacitor/cli": "2.4.8",
-    "@typescript-eslint/eslint-plugin": "3.10.1",
-    "@typescript-eslint/parser": "3.10.1",
+    "@typescript-eslint/eslint-plugin": "4.28.3",
+    "@typescript-eslint/parser": "4.28.3",
     "awesome-typescript-loader": "5.2.1",
     "cypress": "6.9.1",
     "eslint": "7.30.0",
