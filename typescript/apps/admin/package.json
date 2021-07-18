@@ -34,7 +34,7 @@
     "camelcase-keys": "6.2.2",
     "nuxt": "2.15.7",
     "nuxt-typed-vuex": "0.1.19",
-    "sass": "1.34.1",
+    "sass": "1.35.2",
     "snakecase-keys": "3.2.1",
     "typed-vuex": "0.1.19",
     "vee-validate": "3.4.10",
