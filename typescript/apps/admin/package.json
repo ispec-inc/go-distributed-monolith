@@ -61,7 +61,7 @@
     "lint-staged": "10.2.11",
     "prettier": "2.3.2",
     "sass-loader": "7.1.0",
-    "stylelint": "13.6.1",
+    "stylelint": "13.13.1",
     "stylelint-config-prettier": "8.0.2",
     "stylelint-config-standard": "20.0.0"
   }
