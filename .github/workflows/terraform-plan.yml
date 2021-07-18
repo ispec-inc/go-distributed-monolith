@@ -36,7 +36,7 @@ jobs:
 
       - name: Setup terraform
         if: steps.diff.outputs.diff
-        uses: hashicorp/setup-terraform@v1.2.1
+        uses: hashicorp/setup-terraform@v1.3.2
         with:
           terraform_version: 0.14.8
 
