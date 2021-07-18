@@ -25,7 +25,7 @@
     }
   },
   "dependencies": {
-    "@babel/preset-env": "7.12.17",
+    "@babel/preset-env": "7.14.7",
     "@monorepo/fast-form": "./libs/fast-form",
     "@monorepo/proto": "./libs/proto",
     "@nuxt/typescript-runtime": "0.4.10",
