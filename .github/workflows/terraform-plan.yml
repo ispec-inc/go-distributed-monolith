@@ -20,7 +20,7 @@ jobs:
 
       - name: Check diff
         id: diff
-        uses: technote-space/get-diff-action@v4.0.2
+        uses: technote-space/get-diff-action@v4.2.0
         with:
           PATTERNS: |
             terraform/modules/**/*.tf
