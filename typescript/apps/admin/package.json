@@ -39,7 +39,7 @@
     "typed-vuex": "0.1.19",
     "vee-validate": "3.4.10",
     "vue-class-component": "7.2.6",
-    "vue-property-decorator": "9.0.0",
+    "vue-property-decorator": "9.1.2",
     "vuex-module-decorators": "1.0.1"
   },
   "devDependencies": {
