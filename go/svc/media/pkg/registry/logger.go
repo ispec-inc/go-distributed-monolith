@@ -32,6 +32,7 @@ func NewLogger() (Logger, func() error, error) {
 		err = serr
 	default:
 		lgr = stdlog.New()
+		clenaup = func() error { return nil }
 	}
 
 	return Logger{lgr}, clenaup, err

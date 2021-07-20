@@ -1,0 +1,34 @@
+package {{ .PackageName }}
+
+import "github.com/graphql-go/graphql"
+
+type MutationResolverRegistry interface {
+    {{- range $field := .FieldDefinitionList }}
+    {{- if .Definition }}{{- if not .IsPrivate }}
+    {{ .UpperCamelName }}() func(params graphql.ResolveParams) (interface{}, error){{- end }}{{- end }}{{- end }}
+}
+
+func Mutation(r MutationResolverRegistry) *graphql.Object {
+	return graphql.NewObject(graphql.ObjectConfig{
+		Name: "RootMutation",
+		Fields: graphql.Fields{
+			{{- range $field := .FieldDefinitionList }}
+            {{- if .Definition }}{{- if not .IsPrivate }}
+			"{{ .Definition.Name }}": &graphql.Field{
+				Type: {{ .ExtractType }},
+                Description: "{{ .Definition.Description }}",
+                Resolve: r.{{ .UpperCamelName }}(),
+                {{- if .HasArgs }}
+                Args: graphql.FieldConfigArgument{
+                {{- range $arg := .Arguments }}
+                    "{{ .Definition.Name }}": &graphql.ArgumentConfig{
+                        {{- if not .IsPrivate }}
+                        Type: {{ .ExtractType }},
+                        Description: "{{ .Definition.Description }}",
+                    },{{ end }}{{ end }}
+                },
+                {{ end }}
+			},{{ end }}{{ end }}{{ end }}
+		},
+	})
+}

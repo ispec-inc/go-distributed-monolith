@@ -1,0 +1,28 @@
+package {{ .PackageName }}
+
+import "github.com/graphql-go/graphql"
+
+var {{ .Definition.Name }} = graphql.NewObject(
+	graphql.ObjectConfig{
+		Name: "{{ .Definition.Name }}",
+		Fields: graphql.Fields{
+			{{- range $field := .FieldDefinitionList }}
+            {{- if .Definition }}
+			"{{ .Definition.Name }}": &graphql.Field{
+                {{- if not .IsPrivate }}
+				Type: {{ .ExtractType }},
+                Description: "{{ .Definition.Description }}",
+                {{- if .HasArgs }}
+                Args: graphql.FieldConfigArgument{
+                {{- range $arg := .Arguments }}
+                    "{{ .Definition.Name }}": &graphql.ArgumentConfig{
+                        {{- if not .IsPrivate }}
+                        Type: {{ .ExtractType }},
+                        Description: "{{ .Definition.Description }}",
+                    },{{ end }}{{ end }}
+                },
+                {{ end }}{{ end }}
+			},{{ end }}{{ end }}
+		},
+	},
+)
