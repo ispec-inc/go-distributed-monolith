@@ -14,6 +14,8 @@ require (
 	github.com/golang/mock v1.5.0
 	github.com/gomodule/redigo v1.7.1-0.20190724094224-574c33c3df38
 	github.com/google/uuid v1.2.0
+	github.com/graphql-go/graphql v0.7.9
+	github.com/graphql-go/handler v0.2.3
 	github.com/k0kubun/pp v2.4.0+incompatible
 	github.com/lib/pq v1.10.0 // indirect
 	github.com/pkg/errors v0.9.1

@@ -3,6 +3,7 @@ package msgbs
 import (
 	"context"
 	"fmt"
+	"sync"
 
 	"github.com/gomodule/redigo/redis"
 	"github.com/ispec-inc/monorepo/go/pkg/applog"
@@ -34,12 +35,18 @@ func (s Subscriber) Mount(rtr Router) {
 	}
 }
 
-func (s Subscriber) Do(ctx context.Context) {
+func (s Subscriber) Do(
+	ctx context.Context,
+	done chan interface{},
+	wg *sync.WaitGroup,
+) {
 	for evnt, sfuncs := range s.Router {
 		s.MessageBus.Subscribe(evnt)
 		for _, sfunc := range sfuncs {
-			go func(sfunc SubscribeFunc) {
+			wg.Add(1)
+			go func(ctx context.Context, sfunc SubscribeFunc) {
 				for {
+
 					switch v := s.MessageBus.Receive().(type) {
 					case redis.Message:
 						err := sfunc(ctx, v)
@@ -51,8 +58,15 @@ func (s Subscriber) Do(ctx context.Context) {
 					case error:
 						s.AppLog.Error(ctx, v)
 					}
+
+					select {
+					case <-done:
+						wg.Done()
+						return
+					default:
+					}
 				}
-			}(sfunc)
+			}(ctx, sfunc)
 		}
 	}
 }

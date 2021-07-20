@@ -41,13 +41,16 @@ func NewHTTP() (*http.Server, func() error, error) {
 
 	clnup := func() error {
 		var errs error
-		for _, clnup := range clnups {
-			errs = multierr.Append(errs, clnup())
+		for _, c := range clnups {
+			if c != nil {
+				errs = multierr.Append(errs, c())
+			}
 		}
 		return errs
 	}
 
 	port := fmt.Sprintf(":%d", PORT)
+
 	srv := &http.Server{Addr: port, Handler: r}
 	return srv, clnup, nil
 
